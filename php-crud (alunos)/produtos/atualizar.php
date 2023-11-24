@@ -3,7 +3,7 @@
     $listaDeFabricantes = lerFabricantes($conexao);
 
     require_once "../src/funcoes-produtos.php";
-    
+   
     // Pegando o valor do id e sanitizando
     $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 
@@ -12,17 +12,17 @@
 
 
     if (isset($_POST['atualizar'])) {
-        
+       
         // versão com filtro de sanitização (Melhor)
         // Capturando e limpando o que foi digitado no campo nome (Formulário)
-        $nome = filter_input(INPUT_POST. 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
-        $preco = filter_input(INPUT_POST. '', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-        $qualidade = filter_input(INPUT_POST. 'qualidade', FILTER_SANITIZE_NUMBER_INT);
-        $descricao = filter_input(INPUT_POST. 'descricao', FILTER_SANITIZE_SPECIAL_CHARS);
-        $fabricanteID = filter_input(INPUT_POST. 'fabricante', FILTER_SANITIZE_NUMBER_INT);
+        $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
+        $preco = filter_input(INPUT_POST, 'preco', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+        $quantidade = filter_input(INPUT_POST, 'quantidade', FILTER_SANITIZE_NUMBER_INT);
+        $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_SPECIAL_CHARS);
+        $fabricanteId = filter_input(INPUT_POST, 'fabricante', FILTER_SANITIZE_NUMBER_INT);
 
         // Chamando a função e passando os dados de conexão e o nome digitado
-        atualizarProduto($conexao, $id, $nome, $descricao, $preco, $quantidade, $fabrincantesId);
+        atualizarProduto($conexao, $id, $nome, $preco, $quantidade, $descricao, $fabricanteId);
 
         // Redirecionamento (Nada a ver com a Tag do HTML)
         header("location:listar.php");
@@ -39,7 +39,7 @@
     <title>Produtos - Atualizar</title>
 </head>
     <body>
-    
+   
     <div class="container">
             <h1>Produtos | Select e Update</h1>
             <hr>
@@ -70,11 +70,11 @@
                             foreach($listaDeFabricantes as $fabricante) {
                         ?>
 
-                            <option 
+                            <option
                                 <?php if ($produto['fabricante_id'] === $fabricante['id']) echo " Selected ";?>
                                 value="<?=$fabricante['id']?>"> <!-- Para o banco -->
                                 <?=$fabricante['nome']?> <!-- Exibição no Front -->
-                        
+                       
                             </option>
                         <?php } ?>
                     </select>

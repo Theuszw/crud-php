@@ -1,25 +1,25 @@
 <?php 
-if( isset($_POST['inserir']) ) {
-    require_once "../src/funcoes-fabricantes.php";
+    if( isset($_POST['inserir'])) {
+        require_once "../src/funcoes-fabricantes.php";
+        // $nome = $_POST['nome'];
 
-    $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
+        $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
 
-    inserirFabricante($conexao, $nome);
+        inserirFabricante($conexao, $nome);
 
-    header("location:listar.php");
-}
+        header("location:listar.php");
 
+    }
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fabricantes - Inserir</title>
 </head>
 <body>
-
     <div class="container">
         <h1>Fabricantes | Insert</h1>
         <hr>
